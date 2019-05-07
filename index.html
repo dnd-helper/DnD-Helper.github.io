@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Lista Magias D&D 5E</title>
+  <link rel="stylesheet" href="Lista Magias D&D 5E_arquivos/style.css">
+  <link rel="stylesheet" type="text/css"
+      href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css">
+  <style>
+    body {
+      font-family: "Computer Modern Sans", sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+    <script src="Lista Magias D&D 5E_arquivos/jquery-3.js"></script>
+    <script src="Lista Magias D&D 5E_arquivos/isotope.js"></script>
+    <script src="Lista Magias D&D 5E_arquivos/packery-mode.js"></script>
+
+    <script src="Lista Magias D&D 5E_arquivos/spells-by-class.js"></script>
+
+    <script>
+    $(document).ready(function() {
+
+        var initialized = false;
+        var gutter = $('.gutter-size').width();
+        var topStep = $('.separator').position().top;
+        console.log('STEP ' + topStep);
+
+        var level = -1;
+        var visibleSpells = null;
+        var onlyKnown = false;
+
+        // Add 100 pages separators
+        var spellList = $('#spell-list');
+        var currentTop = topStep;
+        var i = 0;
+        while (i < 100) {
+            var separator = $('<div class="separator"></div>');
+            separator.css({top: currentTop});
+            spellList.prepend(separator);
+            currentTop = currentTop + topStep;
+            i = i + 1;
+        }
+
+        function fixHeight() {
+            function sortByHeight(a, b) {
+                var a = $(a), b = $(b);
+                return a.position().top + a.height() > b.position().top + b.height();
+            }
+            // Update height to hide unnecessary separators
+            var lastVisible = spellList.find('.spell-item:visible').sort(sortByHeight).last();
+            var targetHeight = 0;
+            if (lastVisible.length) {
+                targetHeight = lastVisible.position().top + lastVisible.height();
+            }
+            else {
+                $('#empty-message').css('display', 'block');
+            }
+            // Force min-height to be a multiple of page grid-size
+            var newHeight = Math.max(Math.ceil(targetHeight / topStep), 1) * topStep;
+            spellList.css('height', newHeight);
+        }
+
+        function doFilter() {
+          var spellItem = $(this);
+
+
+              var isKnown = spellItem.attr('data-known') == 'true';
+              var forClass = !visibleSpells || $.inArray(spellItem.attr('data-name'), visibleSpells) > 0;
+              var shouldDisplay = (!visibleSpells && !onlyKnown) || isKnown || (!onlyKnown && forClass);
+              var knownIcon = spellItem.find('.known').find('img');
+              // Highlight spells that are known but not for class.
+              if (shouldDisplay && visibleSpells && !forClass) {
+                  knownIcon.attr('src', 'Lista%20Magias%20D&amp;D%205E_arquivos/outside.svg');
+              }
+              else {
+                  knownIcon.attr('src', isKnown ? 'Lista Magias D&D 5E_arquivos/known.svg' : 'Lista Magias D&D 5E_arquivos/unknown.svg');
+              }
+              var current = spellItem.attr('data-level');
+              var levelTitle = spellItem.find('.level');
+              levelTitle.removeAttr('style');
+
+              if (spellItem.attr('data-name') == 'separador') {
+                shouldDisplay = true;
+              }
+
+              if (shouldDisplay && current != level) {
+                  level = current;
+                  levelTitle.css('margin-bottom', gutter);
+              }
+              else {
+                  levelTitle.css('display', 'none');
+              }
+              return shouldDisplay;
+
+
+
+        }
+
+        function applyLayout() {
+            // document.getElementById("separador").style.display = "";
+            $('#empty-message').css('display', 'none');
+            level = -1;
+            if (initialized) {
+                spellList.isotope();
+            }
+            else {
+                spellList.isotope({
+                    layoutMode: 'packery',
+                    packery: {
+                        columnWidth: '.grid-size',
+                        gutter: '.gutter-size',
+                    },
+                    itemSelector: '.grid-item',
+                    stamp: '.separator',
+                    sortBy: 'original-order',
+                    filter: doFilter
+                });
+                spellList.on('arrangeComplete', fixHeight);
+                fixHeight();
+                initialized = true;
+            }
+        }
+
+        $('#class-select').change(function() {
+            var className = $(this).val();
+            if (className == 'all') {
+                visibleSpells = null;
+            }
+            else {
+                visibleSpells = spellByClass[className];
+            }
+            // Check all visible spells does exist.
+            $.each(visibleSpells, function(index, value) {
+                if (spellList.find('.spell-item[data-name="' + value + '"]').length == 0) {
+                    console.warn('Could not find ' + value);
+                }
+            });
+            console.log('Filtering by class ' + className);
+            applyLayout();
+        });
+
+        $('#show-known').click(function() {
+            var elem = $(this);
+            var icon = elem.find('img');
+            onlyKnown = !onlyKnown;
+            icon.attr('src', onlyKnown ? 'Lista Magias D&D 5E_arquivos/known.svg' : 'Lista Magias D&D 5E_arquivos/unknown.svg');
+            applyLayout();
+        });
+
+        // Dynamically change the layout if spell is too long
+        $('.spell-item').each(function (index, elem) {
+            var spellItem = $(elem);
+            if (spellItem.height() > 0.55 * topStep) {
+                spellItem.addClass('long-spell');
+            }
+        });
+
+        $('.known').click(function() {
+            var elem = $(this);
+            var icon = elem.find('img');
+            var spell = elem.closest('.spell-item');
+            var isOutside = icon.attr('src') == 'Lista%20Magias%20D&amp;D%205E_arquivos/outside.svg';
+            if (spell.attr('data-known') == 'true') {
+                icon.attr('src', 'Lista Magias D&D 5E_arquivos/unknown.svg');
+                spell.removeAttr('data-known');
+            }
+            else {
+                icon.attr('src', 'Lista%20Magias%20D&amp;D%205E_arquivos/known.svg');
+                spell.attr('data-known', 'true');
+            }
+            if (!this.checked && ($('#show-known').is(':checked') || isOutside)) {
+                applyLayout();
+            };
+        });
+
+        applyLayout();
+    });
+    </script>
+
+    <div id="menu-container">
+        <div id="menu">
+            <div class="menu-item">
+                <p>Classe</p>
+                <div style="width:2em"></div>
+                <select id="class-select" style="text-align-last:center;">
+                    <option value="all">-----</option>
+                    <option value="bardo">Bardo</option>
+                    <option value="bruxo">Bruxo</option>
+                    <option value="clérigo">Clérigo</option>
+                    <option value="druida">Druida</option>
+                    <option value="feiticeiro">Feiticeiro</option>
+                    <option value="mago">Mago</option>
+                    <option value="paladino">Paladino</option>
+                    <option value="patrulheiro">Patrulheiro</option>
+                </select>
+            </div>
+            <div class="menu-space">
+                </div>
+            <div id="show-known" class="menu-item">
+                <p>Conhecidas</p>
+                <img src="Lista Magias D&D 5E_arquivos/unknown.svg">
+            </div>
+        </div>
+    </div>
+
+    <script src="Lista%20Magias%20D&amp;D%205E_arquivos/spells.js"></script>
+
+
+</body>
+
+<!-- <footer>
+    <p>Imagens baseadas em trabalhos obtidos no The Noun Project (https://thenounproject.com) sob a licença Creative Commons.</p>
+    <p><strong>Autores:</strong> Alfa Design, Creative Stall, Alexander Bogomolov, Nikita Kozin, Gregor Cresnar,
+    Yazmin Alanis,  Delwar Hossain, Gregor Cresnar, Edward Boatman, Luis Prado.</p>
+    <p>Tradução obtida em http://www.bibliotecaelfica.com/. <strong>Créditos:</strong> AlanVenic Gonçalves, Grupo Material RPG.</p>
+</footer> -->
+
+</html>

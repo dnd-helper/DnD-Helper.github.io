@@ -1,0 +1,247 @@
+#menu-container {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 1;
+    overflow: hidden;
+    background: linear-gradient(white 80%, transparent);
+}
+#menu {
+    width: 20cm;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 2px solid black;
+    /* font-family: "helvetica", "sans-serif"; */
+    font-size: 13pt;
+    user-select: none;
+    display: flex;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    background: white;
+}
+.menu-space {
+    flex-grow: 1;
+}
+.menu-item {
+    height: 1.8em;
+    display: flex;
+}
+.menu-item p {
+    font-variant: small-caps;
+    margin: auto;
+    margin-right: 5px;
+    margin-left: 0;
+}
+.menu-item select {
+    font-size: 13pt;
+    width: 8em;
+    margin: 0.1em;
+}
+#show-known:hover {
+    cursor: pointer;
+}
+#show-known img {
+    max-height: 100%;
+}
+#spell-list {
+    /* display: grid; */
+    /* grid-template-columns: auto auto; */
+    margin: auto;
+    /* grid-gap: 0.7%; */
+    margin-top: 65px;
+    max-width: 20cm;
+    box-sizing: border-box;
+    padding: 0;
+    font-size: 0;
+    /* font-family: "helvetica", "sans-serif"; */
+}
+.grid-size, .spell-item {
+    /* grid-column: 1 / 2; */
+    width: 49.65%;
+}
+.gutter-size {
+    width: 0.7%;
+}
+
+.spell-cabeca {
+    width: 100%;
+}
+
+#empty-message {
+    padding: 1em;
+    font-size: 20pt;
+    /* font-family: "helvetica", "sans-serif"; */
+    box-sizing: border-box;
+    background: gray;
+    color: white;
+    border-color: gray;
+    border-radius: 10px;
+    text-align: center;
+    display: none;
+}
+.spell-item {
+    font-size: 10pt;
+    box-sizing: border-box;
+    vertical-align: top;
+    page-break-inside: avoid;
+    display: inline-block;
+    border: none;
+    background: white;
+}
+.level {
+    padding: 0.1em 1em 0.1em 1em;
+    box-sizing: border-box;
+    background: gray;
+    color: white;
+    border-color: gray;
+    font-size: 15pt;
+}
+
+.level-geral {
+    padding: 0.1em 2em 0.1em 2em;
+    box-sizing: border-box;
+    background: gray;
+    color: white;
+    border-color: gray;
+    font-size: 15pt;
+}
+
+
+.spell-body {
+    margin: 0;
+    padding: 0.1em 0.2em 0.1em 0.7em;
+    border: 1px solid;
+}
+.long-spell {
+    width: 100%;
+}
+.title {
+    display: flex;
+    align-items: center;
+    font-size: 13.5pt;
+}
+.name {
+    font-variant: small-caps;
+    font-family: "Calibri Light";
+    font-weight: bold;
+    font-style: italic;
+    border-bottom: 1px solid;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0.2em;
+}
+.name img {
+    height: 1em;
+    margin-bottom: 0.1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    user-select: none;
+}
+.name p {
+    margin-top: 0;
+    margin-bottom: 0.1em;
+}
+.school {
+    font-variant: normal;
+    font-size: 8pt;
+    font-style: italic;
+    text-align: right;
+    white-space: nowrap;
+    flex-grow: 1;
+    margin-right: 0.2em;
+}
+.known {
+    height: 1.5em;
+}
+.known img {
+    user-select: none;
+    max-height: 100%;
+}
+.details {
+    margin-top: 0.1em;
+    margin-right: 0.4em;
+}
+.meta {
+    display: flex;
+    flex-wrap: wrap;
+}
+.meta-item {
+    flex-grow: 1;
+    display: flex;
+    font-size: 9.5pt;
+    height: 1.2em;
+    margin: 1%;
+}
+.meta-item img {
+    max-height: 100%;
+    user-select: none;
+}
+.meta-content {
+    flex-grow: 1;
+    margin: auto;
+    margin-left: 0.5em;
+}
+.description {
+    font-size: 8pt;
+}
+.description p {
+    margin: 0;
+    padding-top: 0.3em;
+    padding-bottom: 0.4em;
+}
+.description ul {
+    padding-left: 1.5em;
+}
+.long-spell .description {
+    column-count: 2;
+    padding-bottom: 0.4em;
+}
+.separator {
+    width: 100%;
+    height: 0;
+    position: absolute;
+    left: 0;
+    top: 28.734cm;
+    background : red;
+}
+footer {
+    background: gray;
+    color: white;
+    padding: 15px;
+}
+footer p {
+    /* font-family: "helvetica", "sans-serif"; Calibri Light*/
+    font-size: 12pt;
+    margin: 0;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+}
+@page {
+    size: A4 portrait;
+    margin: 5mm;
+}
+@media print {
+    .known + label {
+        display: none;
+    }
+    body {
+        margin: 0px;
+    }
+    footer {
+        display: none;
+    }
+    #menu {
+        display: none;
+    }
+    #spell-list {
+        margin: 0;
+    }
+}
