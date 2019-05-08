@@ -1,0 +1,57 @@
+
+/* !-- Media Resources -- */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+.media-resources article { width: 300px; height: 335px; display: block; border: 1px solid #fff; float: left; position: relative; background: #000; text-align: left; overflow: hidden; cursor: pointer;
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+.media-resources article:before { content: ""; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; opacity: 0;
+	-webkit-box-shadow: 0 0 15px rgba(0,0,0,.8) inset; -webkit-transition: opacity .25s ease-in-out;
+	   -moz-box-shadow: 0 0 15px rgba(0,0,0,.8) inset;    -moz-transition: opacity .25s ease-in-out;
+		-ms-box-shadow: 0 0 15px rgba(0,0,0,.8) inset;     -ms-transition: opacity .25s ease-in-out;
+		 -o-box-shadow: 0 0 15px rgba(0,0,0,.8) inset;      -o-transition: opacity .25s ease-in-out;
+			box-shadow: 0 0 15px rgba(0,0,0,.8) inset;         transition: opacity .25s ease-in-out;
+}
+.media-resources article:hover:before { opacity: 1; }
+.media-resources article.dbl { width: 600px; }
+.media-resources article img { cursor:pointer; }
+
+.media-resources article .media-video a:after { cursor:pointer; content: ""; width: 104px; height: 104px; margin: -72px 0 0 -52px; background: url(../img/interface/video-play-button.png) 0 0 no-repeat; background-size: 100% auto; position: absolute; top: 50%; left: 50%; }
+
+.media-resources article.sgl img { margin-left:-300px; left:50%; position:absolute; }
+
+.media-resources article h3 { color: #fff; font-weight: 700; font-size: 2.4rem; line-height: 3.3rem; margin: 0 25px; position:absolute; bottom:25px; }
+.media-resources article h3 span { text-transform: uppercase; background-color: rgba(20,12,10, .7); color: #fff; padding: 0 2px;
+	-webkit-box-shadow: 6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7); -webkit-transition-property: -webkit-box-shadow, background-color; -webkit-transition-duration: .25s; -webkit-transition-timing-function: ease-in-out;
+	   -moz-box-shadow: 6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7);    -moz-transition-property:    -moz-box-shadow, background-color;    -moz-transition-duration: .25s;    -moz-transition-timing-function: ease-in-out;
+	    -ms-box-shadow: 6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7);     -ms-transition-property:     -ms-box-shadow, background-color;     -ms-transition-duration: .25s;     -ms-transition-timing-function: ease-in-out;
+	     -o-box-shadow: 6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7);      -o-transition-property:      -o-box-shadow, background-color;      -o-transition-duration: .25s;      -o-transition-timing-function: ease-in-out;
+	        box-shadow: 6px 0 0 rgba(20,12,10, .7), -6px 0 0 rgba(20,12,10, .7);         transition-property:         box-shadow, background-color;         transition-duration: .25s;         transition-timing-function: ease-in-out;
+}
+.media-resources article h3 span.first-line { color:#959595; font-size: 1.6rem; line-height: 2rem; display: table; }
+
+.media-resources article:hover h3 span { background-color: #9d0a0e;
+	-webkit-box-shadow: 6px 0 0 #9d0a0e, -6px 0 0 #9d0a0e;
+	   -moz-box-shadow: 6px 0 0 #9d0a0e, -6px 0 0 #9d0a0e;
+	    -ms-box-shadow: 6px 0 0 #9d0a0e, -6px 0 0 #9d0a0e;
+	     -o-box-shadow: 6px 0 0 #9d0a0e, -6px 0 0 #9d0a0e;
+	        box-shadow: 6px 0 0 #9d0a0e, -6px 0 0 #9d0a0e;
+}
+
+@media (max-width: 1200px) {
+	.media-resources { padding: 0 20px; text-align: center;}
+	.media-resources article.dbl, .media-resources article.sgl { width: 33.33%; }
+	.media-resources article img { margin-left:-300px; left:50%; position:absolute; }
+}
+@media (max-width: 1023px) {
+	.media-resources article.dbl, .media-resources article.sgl { width: 50%; }
+}
+@media (max-width: 767px) {
+	.media-resources article.dbl, .media-resources article.sgl { width: 100%; }
+	.media-resources article.dbl img, .media-resources article.sgl img { min-width:100%; height:auto; margin-left:0; left:auto; }
+}
+@media (max-width: 600px) {
+	.media-resources article.dbl img, .media-resources article.sgl img { width:600px; height:auto; margin-left:-300px; left:50%; }
+}
