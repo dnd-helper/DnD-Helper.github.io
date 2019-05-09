@@ -674,14 +674,16 @@ article p.lead { font-size: 1.8rem; line-height: 2.4rem; }
 	.child-playevents #page-header .intro { width: auto; }
 	.child-playevents #page-header .page-width { width: 50%; }
 	#page-header,
-	#page-header img,
-	#page-header video
+	#page-header img
 		{ height: 321px; }
+	/* #page-header video
+		{ height: 321px; } */
 	.hub #page-header { height: 400px; }
 	#page-header { background-size: auto 100% !important; }
-	#page-header img,
-	#page-header video
-		{ margin: 0 0 0 -511px; width: 1023px; position: absolute; top: 0; left: 50%; }
+	#page-header img
+		{ margin: 0 0 0 -511px; width: 1023px; position: absolute; top: 0; left: 50%; } */
+	/* #page-header video
+		{ margin: 0 0 0 -511px; width: 1023px; position: absolute; top: 0; left: 50%; } */
 	.article #page-header .page-width { bottom: 45px; }
 	.article #page-header img,
 	.article #page-header video
