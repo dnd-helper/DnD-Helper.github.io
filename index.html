@@ -37,6 +37,7 @@
   <link rel="stylesheet" type="text/css" href="css/eu_cookie_compliance.css">
   <link rel="stylesheet" type="text/css" href="css/fonts.css">
   <link rel="stylesheet" type="text/css" href="css/own.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
   <link rel="stylesheet" type="text/css" href="css/owl.carousel.css">
   <link rel="stylesheet" type="text/css" href="css/core.css">
@@ -104,6 +105,22 @@
 <script src="files/iframe_api"></script>
 
 
+<script type="text/javascript">
+  var imageURLs = [
+       "banners/banner1.jpg"
+     , "banners/banner2.jpg"
+     , "banners/banner3.jpg"
+  ];
+  function getImageTag() {
+    var img = '<img src=\"';
+    var randomIndex = Math.floor(Math.random() * imageURLs.length);
+    img += imageURLs[randomIndex];
+    img += '\" alt=\"Media\"/>';
+    return img;
+  }
+</script>
+
+
 </head>
 <body class="html not-front not-logged-in no-sidebars page-articles page-articles-media-resources page-articles-media-resources-wallpapers product_tabletop-games_basic-rules eu-cookie-compliance-processed loaded windows" style="">
   <div id="mobile-menu">
@@ -137,7 +154,7 @@
               <header style="">
 
 
-                <div class="wrapper">
+                <div class="wrapper" style="">
                   <!-- Menu -->
                   <nav id="menu">
                     <a class="home" href="https://dnd-helper.github.io/"><span>Dungeons & Dragons</span></a>
@@ -179,7 +196,10 @@
 
                 <!-- Page Header -->
                 <div id="page-header">
-                  <img src="https://dnd-helper.github.io/files/ArticleH_ihqwixhqwoi3.jpg" alt="Media">
+                  <script type="text/javascript">
+                    document.write(getImageTag());
+                  </script>
+                  <!-- <img src="banners/banner1.jpg" alt="Media"> -->
 
                   <div class="page-width">
                     <div class="intro">
@@ -314,5 +334,6 @@
     </div>
     <script type="text/javascript" src="https://dnd-helper.github.io/files/eu_cookie_compliance.js"></script>
     <script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","licenseKey":"574829f0b8","applicationID":"70689639","transactionName":"MVJbMkNUDRcHUEAICggYeAVFXAwKSVdMUDoLUl0PUGoRARVcQRMGA0RmBV5bFwEIRw==","queueTime":0,"applicationTime":340,"atts":"HRVYRAtOHhk=","errorBeacon":"bam.nr-data.net","agent":""}</script>
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script> -->
 
   </body></html>
